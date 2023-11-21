@@ -13,14 +13,10 @@ MainWindow::MainWindow(QWidget *parent)
     QMovie *movie = new QMovie("/home/student/Comp3004-Group-Project/heartRateMonitor.gif");
     processLabel->setMovie(movie);
     processLabel->setGeometry(920,10,152,90);
-
-
-
-
     movie->start ();
 
-
-
+    
+    connect(ui->placePad,SIGNAL(released()), this, SLOT(placePad()));
 
 
 
@@ -35,5 +31,12 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::placePad()
+{
+    ui->pad1->setStyleSheet("background-color: rgb(50, 205,50);");
+    ui->pad2->setStyleSheet("background-color: rgb(50, 205,50);");
+    ui->pad3->setStyleSheet("background-color: rgb(50, 205,50);");
 }
 
