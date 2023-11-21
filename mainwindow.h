@@ -28,6 +28,7 @@ private:
 private slots:
     void placePad();
     void bodyType();
+    void shockDelivery();
 
 };
 #endif // MAINWINDOW_H
