@@ -59,3 +59,18 @@ void MainWindow::bodyType()
 
 }
 
+//adult HR > 150 / child HR > 200 => shockable rhythm identified
+//prompt to deliver shock
+//press "Shock Delivery" button
+//for later: a simulation button for someone being in contact with patient when shock is being delivered
+void MainWindow::shockDelivery()
+{
+
+
+}
+
+
+
+
+
+
