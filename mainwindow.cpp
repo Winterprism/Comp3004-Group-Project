@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QLabel *processLabel = new QLabel(this);
     processLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-    QMovie *movie = new QMovie("/home/student/Comp3004-Group-Project/heartRateMonitor.gif");
+    QMovie *movie = new QMovie("/home/student/Comp3004-Group-Project-main/heartRateMonitor.gif");
     processLabel->setMovie(movie);
     processLabel->setGeometry(920,10,152,90);
     movie->start ();
