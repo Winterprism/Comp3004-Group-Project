@@ -5,6 +5,8 @@
 #include <QMovie>
 #include <QLabel>
 
+#include "cpr.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -20,5 +22,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+private slots:
+    void placePad();;
+
 };
 #endif // MAINWINDOW_H
