@@ -36,6 +36,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pad1_3->hide();
     ui->pad1_4->hide();
     ui->pad1_5->hide();
+
+    ui->CPR->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
