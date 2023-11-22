@@ -27,8 +27,11 @@ private:
 
 private slots:
     void placePad();
-    void bodyType();
+    void bodyType(int index);
     void shockDelivery();
+
+
+    void placePadIncorrectly();
 
 };
 #endif // MAINWINDOW_H
