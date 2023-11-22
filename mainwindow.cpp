@@ -17,15 +17,25 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     connect(ui->placePad,SIGNAL(released()), this, SLOT(placePad()));
+    connect(ui->electrodePadOption, SIGNAL(currentIndexChanged(int)),this, SLOT(bodyType(int)));
+
+    connect(ui->placePadIncorrectly,SIGNAL(released()), this, SLOT(placePadIncorrectly()));
 
 
 
+    ui->padChild1->hide();
+    ui->padChild2->hide();
+    ui->padChild3->hide();
 
-
-
-
-
-
+    ui->pad1->hide();
+    ui->pad2->hide();
+    ui->pad3->hide();
+    ui->pad4->hide();
+    ui->pad1_1->hide();
+    ui->pad1_2->hide();
+    ui->pad1_3->hide();
+    ui->pad1_4->hide();
+    ui->pad1_5->hide();
 }
 
 MainWindow::~MainWindow()
@@ -35,27 +45,79 @@ MainWindow::~MainWindow()
 
 void MainWindow::placePad()
 {
-    ui->pad1->setStyleSheet("background-color: rgb(50, 205,50);");
-    ui->pad2->setStyleSheet("background-color: rgb(50, 205,50);");
-    ui->pad3->setStyleSheet("background-color: rgb(50, 205,50);");
+   padChoice = ui->electrodePadOption->currentText();
+    if(padChoice == "Adult Pads"){
+        ui->pad1->show();
+        ui->pad2->show();
+        ui->pad3->show();
+        ui->pad4->show();
+        ui->pad1_1->show();
+        ui->pad1_2->show();
+        ui->pad1_3->show();
+        ui->pad1_4->show();
+        ui->pad1_5->show();
+    }else{
+        ui->padChild1->show();
+        ui->padChild2->show();
+        ui->padChild3->show();
+    }
 
-
-    padChoice = ui->electrodePadOption->currentText();
-
-    ui->GUIConsole->append(padChoice);
-
-
+    ui->GUIConsole->append(padChoice + " Chosen");
 }
 
 
-void MainWindow::bodyType()
+void MainWindow::bodyType(int index)
 {
-    if (ui->electrodePadOption->currentText() == "adult"){
-        ui->GUIConsole->append("adult");
+    if(index  == 0){ //Adult
+        ui->GUIConsole->append("Adult Chosen");
+        ui->padChild1->hide();
+        ui->padChild2->hide();
+        ui->padChild3->hide();
+
+        ui->BoobLeft->show();
+        ui->BoobRight->show();
+        ui->ab1->show();
+        ui->ab2->show();
+        ui->ab3->show();
+        ui->ab4->show();
+        ui->ab5->show();
+        ui->ab6->show();
+
+    }else{ //Child
+        ui->GUIConsole->append("Child Chosen");
+        ui->pad1->hide();
+        ui->pad2->hide();
+        ui->pad3->hide();
+        ui->pad4->hide();
+        ui->pad1_1->hide();
+        ui->pad1_2->hide();
+        ui->pad1_3->hide();
+        ui->pad1_4->hide();
+        ui->pad1_5->hide();
+
+        ui->BoobLeft->hide();
+        ui->BoobRight->hide();
+        ui->ab1->hide();
+        ui->ab2->hide();
+        ui->ab3->hide();
+        ui->ab4->hide();
+        ui->ab5->hide();
+        ui->ab6->hide();
+    }
+}
+
+void MainWindow::placePadIncorrectly()
+{
+    padChoice = ui->electrodePadOption->currentText();
+    if(padChoice == "Adult Pads"){
+
     }else{
-        ui->GUIConsole->append("child");
+
     }
 
+    ui->GUIConsole->clear();
+    ui->GUIConsole->append(padChoice + " are placed Incorrectly");
+    ui->GUIConsole->append("Please place correctly");
 
 }
 
