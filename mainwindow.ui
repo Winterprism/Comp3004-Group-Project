@@ -254,7 +254,7 @@ border-color: rgb(255, 255, 255);</string>
      <rect>
       <x>695</x>
       <y>25</y>
-      <width>91</width>
+      <width>101</width>
       <height>51</height>
      </rect>
     </property>
@@ -279,9 +279,9 @@ background-color: rgb(0, 0, 0);
    <widget class="QTextEdit" name="textEdit_4">
     <property name="geometry">
      <rect>
-      <x>780</x>
+      <x>790</x>
       <y>20</y>
-      <width>51</width>
+      <width>41</width>
       <height>61</height>
      </rect>
     </property>
@@ -322,10 +322,10 @@ border-color: rgb(255, 255, 255);</string>
    <widget class="QTextEdit" name="pad2">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>100</y>
-      <width>81</width>
-      <height>271</height>
+      <x>350</x>
+      <y>90</y>
+      <width>71</width>
+      <height>191</height>
      </rect>
     </property>
    </widget>
@@ -358,19 +358,19 @@ border-color: rgb(255, 255, 255);</string>
    <widget class="QTextEdit" name="pad1">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>100</y>
-      <width>101</width>
+      <x>250</x>
+      <y>90</y>
+      <width>91</width>
       <height>91</height>
      </rect>
     </property>
    </widget>
-   <widget class="QTextEdit" name="pad3">
+   <widget class="QTextEdit" name="pad4">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>430</x>
       <y>280</y>
-      <width>101</width>
+      <width>91</width>
       <height>91</height>
      </rect>
     </property>
@@ -544,6 +544,102 @@ border-color: rgb(255, 255, 255);</string>
      <string>Place pad Incorrectly</string>
     </property>
    </widget>
+   <widget class="QTextEdit" name="pad3">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>290</y>
+      <width>71</width>
+      <height>81</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="pad1_1">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>180</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="pad1_2">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>95</y>
+      <width>41</width>
+      <height>81</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="pad1_3">
+    <property name="geometry">
+     <rect>
+      <x>355</x>
+      <y>220</y>
+      <width>61</width>
+      <height>81</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="pad1_5">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>370</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="pad1_4">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>295</y>
+      <width>41</width>
+      <height>71</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="padChild1">
+    <property name="geometry">
+     <rect>
+      <x>335</x>
+      <y>155</y>
+      <width>121</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(94, 92, 100);</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="padChild2">
+    <property name="geometry">
+     <rect>
+      <x>345</x>
+      <y>165</y>
+      <width>101</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(192, 191, 188);</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="padChild3">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>250</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
    <zorder>AEDDisplay</zorder>
    <zorder>textEdit</zorder>
    <zorder>GUIConsole</zorder>
@@ -577,10 +673,19 @@ border-color: rgb(255, 255, 255);</string>
    <zorder>ab4</zorder>
    <zorder>ab5</zorder>
    <zorder>ab6</zorder>
-   <zorder>pad1</zorder>
-   <zorder>pad2</zorder>
-   <zorder>pad3</zorder>
    <zorder>placePadIncorrectly</zorder>
+   <zorder>pad1_1</zorder>
+   <zorder>pad1_2</zorder>
+   <zorder>pad1</zorder>
+   <zorder>pad1_3</zorder>
+   <zorder>pad2</zorder>
+   <zorder>pad1_5</zorder>
+   <zorder>pad1_4</zorder>
+   <zorder>pad3</zorder>
+   <zorder>pad4</zorder>
+   <zorder>padChild1</zorder>
+   <zorder>padChild2</zorder>
+   <zorder>padChild3</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
