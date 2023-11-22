@@ -6,6 +6,10 @@ class CPR
 {
 public:
     CPR();
+    void enableCPR();
+
+private:
+    bool isCPRDisabled;
 };
 
 #endif // CPR_H
