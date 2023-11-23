@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     processLabel->setMovie(movie);
     processLabel->setGeometry(920,10,152,90);
 
+
     connect(ui->placePad,SIGNAL(released()), this, SLOT(placePad()));
     connect(ui->electrodePadOption, SIGNAL(currentIndexChanged(int)),this, SLOT(bodyType(int)));
     connect(ui->powerOn,SIGNAL(released()), this, SLOT(power()));
@@ -63,6 +64,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pad1_5->hide();
 
     ui->CPR->setEnabled(false);
+    ui->shockDelivery->setEnabled(false);
+    ui->contactShockDelivery->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -167,6 +170,7 @@ void MainWindow::power()
                 emit replaceB();
         else{
             emit powerOn();
+            movie->setSpeed(200);
             movie->start();
             drainTimer->start(1800);
 
@@ -200,7 +204,10 @@ void MainWindow::drainBattery(){
 //for later: a simulation button for someone being in contact with patient when shock is being delivered
 void MainWindow::shockDelivery()
 {
+    ui->GUIConsole->clear();
     ui->GUIConsole->append("Shock Delivered\n");
+
+    ui->contactShockDelivery->setEnabled(true);
 }
 
 
