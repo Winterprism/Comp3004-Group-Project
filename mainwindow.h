@@ -37,9 +37,8 @@ private slots:
     void power();
     void replaceBattery();
     void drainBattery();
-
-
     void placePadIncorrectly();
+    void patientContactDuringShockDelivery();
 
 };
 #endif // MAINWINDOW_H
