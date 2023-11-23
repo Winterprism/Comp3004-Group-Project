@@ -18,6 +18,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->placePad,SIGNAL(released()), this, SLOT(placePad()));
     connect(ui->electrodePadOption, SIGNAL(currentIndexChanged(int)),this, SLOT(bodyType(int)));
+    connect(ui->powerOn,SIGNAL(released()), this, SLOT(power()));
+    connect(ui->replaceBattery,SIGNAL(released()), this, SLOT(replaceBattery()));
+    connect(this,&MainWindow::powerOn, d,&Display::powerOn);
+    connect(this,&MainWindow::powerOff, d,&Display::powerOff);
+    connect(this,&MainWindow::replaceB, d,&Display::replaceB);
+    connect(drainTimer, &QTimer::timeout, this, &MainWindow::drainBattery);
 
     connect(ui->placePadIncorrectly,SIGNAL(released()), this, SLOT(placePadIncorrectly()));
 
@@ -122,6 +128,53 @@ void MainWindow::placePadIncorrectly()
     ui->GUIConsole->append("Please place correctly");
 
 }
+
+void MainWindow::power()
+{
+   if(ui->powerOn->text() == "Power Off"){
+        ui->powerOn->setText("Power On");
+        ui->powerOn->setStyleSheet("background-color: rgb(50, 205,50);");
+        emit powerOff();
+        movie->stop();
+        drainTimer->stop();
+
+   }
+   else{
+        ui->powerOn->setText("Power Off");
+        ui->powerOn->setStyleSheet("background-color: rgb(205, 50,50);");
+        int PBV = ui->batteryProgressBar->value();
+        if( PBV <= 0)
+//                ui->powerOn->setText(QString::number(PBV));
+                emit replaceB();
+        else{
+            emit powerOn();
+            movie->start();
+            drainTimer->start(1800);
+
+
+
+        }
+
+   }
+
+
+}
+
+
+
+void MainWindow::replaceBattery(){
+    ui->batteryProgressBar->setValue(100);
+}
+
+void MainWindow::drainBattery(){
+    int currentValue= ui->batteryProgressBar->value();
+    if(currentValue > 0){
+       ui->batteryProgressBar->setValue(currentValue-1);
+    }else{
+        drainTimer->stop();
+    }
+}
+
 
 //adult HR > 150 / child HR > 200 => shockable rhythm identified
 //prompt to deliver shock
