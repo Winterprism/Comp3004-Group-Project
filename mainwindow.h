@@ -20,15 +20,23 @@ public:
     ~MainWindow();
 
     QString padChoice;
-
+signals:
+    void powerOn();
+    void powerOff();
+    void replaceB();
 
 private:
     Ui::MainWindow *ui;
+    QMovie *movie;
+    QTimer *drainTimer;
 
 private slots:
     void placePad();
     void bodyType(int index);
     void shockDelivery();
+    void power();
+    void replaceBattery();
+    void drainBattery();
 
 
     void placePadIncorrectly();
