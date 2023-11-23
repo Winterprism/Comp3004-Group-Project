@@ -12,10 +12,9 @@ MainWindow::MainWindow(QWidget *parent)
     Display *d = new Display(ui->GUIConsole,this);
     QLabel *processLabel = new QLabel(this);
     processLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-    movie = new QMovie("/home/student/Comp3004-Group-Project-main/heartRateMonitor.gif");
+    movie = new QMovie("/home/student/Comp3004-Group-Project-main/heartBeat.gif");
     processLabel->setMovie(movie);
     processLabel->setGeometry(920,10,152,90);
-
 
     connect(ui->placePad,SIGNAL(released()), this, SLOT(placePad()));
     connect(ui->electrodePadOption, SIGNAL(currentIndexChanged(int)),this, SLOT(bodyType(int)));
@@ -27,7 +26,26 @@ MainWindow::MainWindow(QWidget *parent)
     connect(drainTimer, &QTimer::timeout, this, &MainWindow::drainBattery);
 
     connect(ui->placePadIncorrectly,SIGNAL(released()), this, SLOT(placePadIncorrectly()));
+    connect(ui->shockDelivery, SIGNAL(released()), this, SLOT(shockDelivery()));
+    connect(ui->contactShockDelivery, SIGNAL(released()), this, SLOT(patientContactDuringShockDelivery()));
 
+    //heart rate modifier using slider
+
+    //adult HR > 150 / child HR > 200 => shockable rhythm identified
+    //prompt to deliver shock
+    //press "Shock Delivery" button
+
+    QObject::connect(ui->horizontalSlider, &QSlider::valueChanged, [&]() {
+        ui->currHeartRate->setText(QString::number(ui->horizontalSlider->value()));
+        if (ui->horizontalSlider->value() > 150){
+            movie->setSpeed(600);
+            ui->GUIConsole->clear();
+            ui->GUIConsole->append("SHOCKABLE RHYTHM IDENTIFIED\n");
+            ui->GUIConsole->append("Shock advised\n");
+            ui->shockDelivery->setEnabled(true);
+        }
+
+    });
 
 
     ui->padChild1->hide();
@@ -178,18 +196,19 @@ void MainWindow::drainBattery(){
 }
 
 
-//adult HR > 150 / child HR > 200 => shockable rhythm identified
-//prompt to deliver shock
-//press "Shock Delivery" button
+
 //for later: a simulation button for someone being in contact with patient when shock is being delivered
 void MainWindow::shockDelivery()
 {
-
-
+    ui->GUIConsole->append("Shock Delivered\n");
 }
 
 
-
+void MainWindow::patientContactDuringShockDelivery()
+{
+    ui->GUIConsole->clear();
+    ui->GUIConsole->append("PLEASE ENSURE THERE IS NO CONTACT WITH PATIENT WHEN SHOCK IS DELIVERED");
+}
 
 
 
