@@ -101,22 +101,6 @@ border-color: rgb(0, 0, 0);</string>
      <string>Heart Rate</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>1120</x>
-      <y>50</y>
-      <width>41</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 20pt &quot;DejaVu Sans&quot;;</string>
-    </property>
-    <property name="text">
-     <string>90</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="powerOn">
     <property name="geometry">
      <rect>
@@ -640,13 +624,88 @@ border-color: rgb(255, 255, 255);</string>
      </rect>
     </property>
    </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>930</x>
+      <y>420</y>
+      <width>141</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Heart Rate Modifier:</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="horizontalSlider">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>420</y>
+      <width>160</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>90</number>
+    </property>
+    <property name="maximum">
+     <number>250</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="currHeartRate">
+    <property name="geometry">
+     <rect>
+      <x>1110</x>
+      <y>50</y>
+      <width>71</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:0; 
+font: 16pt &quot;DejaVu Sans&quot;;
+text-align: center;</string>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Sans';&quot;&gt;90&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="contactShockDelivery">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>590</y>
+      <width>251</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 8pt &quot;DejaVu Sans&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Contact with patient during shock delivery</string>
+    </property>
+   </widget>
    <zorder>AEDDisplay</zorder>
    <zorder>textEdit</zorder>
    <zorder>GUIConsole</zorder>
    <zorder>heartmonitorBox</zorder>
    <zorder>lineEdit_2</zorder>
    <zorder>label</zorder>
-   <zorder>label_2</zorder>
    <zorder>powerOn</zorder>
    <zorder>replaceBattery</zorder>
    <zorder>electrodePadOption</zorder>
@@ -686,6 +745,10 @@ border-color: rgb(255, 255, 255);</string>
    <zorder>padChild1</zorder>
    <zorder>padChild2</zorder>
    <zorder>padChild3</zorder>
+   <zorder>label_3</zorder>
+   <zorder>horizontalSlider</zorder>
+   <zorder>currHeartRate</zorder>
+   <zorder>contactShockDelivery</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
