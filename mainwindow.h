@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QMovie>
 #include <QLabel>
-
+#include "display.h"
 #include "cpr.h"
 
 QT_BEGIN_NAMESPACE
