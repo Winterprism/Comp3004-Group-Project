@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->electrodePadOption, SIGNAL(currentIndexChanged(int)),this, SLOT(bodyType(int)));
     connect(ui->powerOn,SIGNAL(released()), this, SLOT(power()));
     connect(ui->replaceBattery,SIGNAL(released()), this, SLOT(replaceBattery()));
+    connect(ui->CPR, SIGNAL(released()), this, SLOT(cprPressed()));
     connect(this,&MainWindow::powerOn, d,&Display::powerOn);
     connect(this,&MainWindow::powerOff, d,&Display::powerOff);
     connect(this,&MainWindow::replaceB, d,&Display::replaceB);
@@ -43,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
             ui->GUIConsole->clear();
             ui->GUIConsole->append("SHOCKABLE RHYTHM IDENTIFIED\n");
             ui->GUIConsole->append("Shock advised\n");
-            ui->shockDelivery->setEnabled(true);
+//            ui->CPR->setEnabled(false); //when ready to test
         }
 
     });
@@ -217,5 +218,9 @@ void MainWindow::patientContactDuringShockDelivery()
     ui->GUIConsole->append("PLEASE ENSURE THERE IS NO CONTACT WITH PATIENT WHEN SHOCK IS DELIVERED");
 }
 
-
+void MainWindow::cprPressed()
+{
+    ui->GUIConsole->clear();
+    ui->GUIConsole->append("Performing CPR");
+}
 
