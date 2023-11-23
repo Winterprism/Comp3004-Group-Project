@@ -8,12 +8,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
 
+    drainTimer = new QTimer(this);
+    Display *d = new Display(ui->GUIConsole,this);
     QLabel *processLabel = new QLabel(this);
     processLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-    QMovie *movie = new QMovie("/home/student/Comp3004-Group-Project-main/heartRateMonitor.gif");
+    movie = new QMovie("/home/student/Comp3004-Group-Project-main/heartRateMonitor.gif");
     processLabel->setMovie(movie);
     processLabel->setGeometry(920,10,152,90);
-    movie->start ();
 
 
     connect(ui->placePad,SIGNAL(released()), this, SLOT(placePad()));
