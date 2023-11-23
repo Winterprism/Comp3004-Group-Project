@@ -39,6 +39,7 @@ private slots:
     void drainBattery();
     void placePadIncorrectly();
     void patientContactDuringShockDelivery();
+    void cprPressed();
 
 };
 #endif // MAINWINDOW_H
