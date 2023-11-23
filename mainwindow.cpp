@@ -44,7 +44,6 @@ MainWindow::MainWindow(QWidget *parent)
             ui->GUIConsole->clear();
             ui->GUIConsole->append("SHOCKABLE RHYTHM IDENTIFIED\n");
             ui->GUIConsole->append("Shock advised\n");
-//            ui->CPR->setEnabled(false); //when ready to test
         }
 
     });
@@ -64,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pad1_4->hide();
     ui->pad1_5->hide();
 
-    ui->CPR->setEnabled(false);
+    // ui->CPR->setEnabled(false); //When ready to test
     ui->shockDelivery->setEnabled(false);
     ui->contactShockDelivery->setEnabled(false);
 }
