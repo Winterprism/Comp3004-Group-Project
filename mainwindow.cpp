@@ -173,6 +173,7 @@ void MainWindow::drainBattery(){
        ui->batteryProgressBar->setValue(currentValue-1);
     }else{
         drainTimer->stop();
+        power();
     }
 }
 
