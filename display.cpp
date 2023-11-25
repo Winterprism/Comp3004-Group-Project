@@ -8,7 +8,7 @@ void Display::powerOn(){
     QTimer::singleShot(4000,this,&Display::batteriesCheck);
 }
 void Display::electrodesCheck(){
-    d->setText("Electrodes Are Correctelly Placed\n");
+    d->setText("Electrodes Are Correctly Placed\n");
 }
 void Display::batteriesCheck(){
     d->setText("Batteries are installed");
