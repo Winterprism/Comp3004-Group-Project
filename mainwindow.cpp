@@ -170,7 +170,7 @@ void MainWindow::power()
                 emit replaceB();
         else{
             emit powerOn();
-            movie->setSpeed(200);
+            movie->setSpeed(100);
             movie->start();
             drainTimer->start(1800);
 
@@ -204,7 +204,7 @@ void MainWindow::drainBattery(){
 //for later: a simulation button for someone being in contact with patient when shock is being delivered
 void MainWindow::shockDelivery()
 {
-    ui->GUIConsole->clear();
+    // ui->GUIConsole->clear();
     ui->GUIConsole->append("Shock Delivered\n");
 
     ui->contactShockDelivery->setEnabled(true);
