@@ -27,6 +27,7 @@ signals:
 
 private:
     Ui::MainWindow *ui;
+    QLabel *processLabel;
     QMovie *movie;
     QTimer *drainTimer;
 
