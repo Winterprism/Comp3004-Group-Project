@@ -77,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pad1_4->hide();
     ui->pad1_5->hide();
 
-    ui->CPR->setEnabled(false);
+    // ui->CPR->setEnabled(false); //uncomment when ready to test
     ui->shockDelivery->setEnabled(false);
     ui->contactShockDelivery->setEnabled(false);
 }
@@ -235,7 +235,7 @@ void MainWindow::patientContactDuringShockDelivery()
 
 void MainWindow::cprPressed()
 {
-    ui->GUIConsole->clear();
+    // ui->GUIConsole->clear();
     ui->GUIConsole->append("Performing CPR");
 }
 
