@@ -6,11 +6,14 @@ class CPR
 {
 public:
     CPR();
-    void enableCPR();
-    bool isCPREnabled();
+    void enable();
+    bool isEnabled();
+    void perform();
+    void stop();
 
 private:
     bool enabled;
+    bool isPerforming;
 };
 
 #endif // CPR_H
