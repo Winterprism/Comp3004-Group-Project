@@ -21,7 +21,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
+      <y>10</y>
       <width>881</width>
       <height>581</height>
      </rect>
@@ -312,6 +312,9 @@ border-color: rgb(255, 255, 255);</string>
       <height>191</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(68, 154, 214);</string>
+    </property>
    </widget>
    <widget class="QLabel" name="heartMonitor">
     <property name="geometry">
@@ -348,6 +351,10 @@ border-color: rgb(255, 255, 255);</string>
       <height>91</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border: 2px solid #555;
+border-color: rgb(255, 255, 255);</string>
+    </property>
    </widget>
    <widget class="QTextEdit" name="pad4">
     <property name="geometry">
@@ -357,6 +364,10 @@ border-color: rgb(255, 255, 255);</string>
       <width>91</width>
       <height>91</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 2px solid #555;
+border-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="BoobLeft">
@@ -537,15 +548,22 @@ border-color: rgb(255, 255, 255);</string>
       <height>81</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(68, 154, 214);</string>
+    </property>
    </widget>
    <widget class="QPlainTextEdit" name="pad1_1">
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>180</y>
+      <y>90</y>
       <width>81</width>
-      <height>31</height>
+      <height>121</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 2px solid #555;
+border-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="pad1_2">
@@ -557,6 +575,9 @@ border-color: rgb(255, 255, 255);</string>
       <height>81</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(222, 221, 218);</string>
+    </property>
    </widget>
    <widget class="QTextEdit" name="pad1_3">
     <property name="geometry">
@@ -567,15 +588,22 @@ border-color: rgb(255, 255, 255);</string>
       <height>81</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(222, 221, 218);</string>
+    </property>
    </widget>
    <widget class="QTextEdit" name="pad1_5">
     <property name="geometry">
      <rect>
       <x>440</x>
-      <y>370</y>
+      <y>280</y>
       <width>81</width>
-      <height>31</height>
+      <height>121</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 2px solid #555;
+border-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="pad1_4">
@@ -586,6 +614,9 @@ border-color: rgb(255, 255, 255);</string>
       <width>41</width>
       <height>71</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(222, 221, 218);</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="padChild1">
@@ -700,6 +731,34 @@ p, li { white-space: pre-wrap; }
      <string>Contact with patient during shock delivery</string>
     </property>
    </widget>
+   <widget class="QTextEdit" name="pad1_7">
+    <property name="geometry">
+     <rect>
+      <x>448</x>
+      <y>300</y>
+      <width>65</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 8px solid #555;
+border-color: rgb(255, 255, 255);</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="pad1_6">
+    <property name="geometry">
+     <rect>
+      <x>258</x>
+      <y>110</y>
+      <width>65</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 8px solid #555;
+border-color: rgb(255, 255, 255);</string>
+    </property>
+   </widget>
    <zorder>AEDDisplay</zorder>
    <zorder>textEdit</zorder>
    <zorder>GUIConsole</zorder>
@@ -749,6 +808,8 @@ p, li { white-space: pre-wrap; }
    <zorder>horizontalSlider</zorder>
    <zorder>currHeartRate</zorder>
    <zorder>contactShockDelivery</zorder>
+   <zorder>pad1_7</zorder>
+   <zorder>pad1_6</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
