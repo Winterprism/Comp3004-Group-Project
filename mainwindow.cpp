@@ -76,6 +76,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pad1_3->hide();
     ui->pad1_4->hide();
     ui->pad1_5->hide();
+    ui->pad1_6->hide();
+    ui->pad1_7->hide();
 
     // ui->CPR->setEnabled(false); //uncomment when ready to test
     ui->shockDelivery->setEnabled(false);
@@ -100,18 +102,22 @@ void MainWindow::placePad()
         ui->pad1_3->show();
         ui->pad1_4->show();
         ui->pad1_5->show();
+        ui->pad1_6->show();
+        ui->pad1_7->show();
     }else{
         ui->padChild1->show();
         ui->padChild2->show();
         ui->padChild3->show();
     }
 
+    ui->GUIConsole->clear();
     ui->GUIConsole->append(padChoice + " Chosen");
 }
 
 void MainWindow::bodyType(int index)
 {
     if(index  == 0){ //Adult
+        ui->GUIConsole->clear();
         ui->GUIConsole->append("Adult Chosen");
         ui->padChild1->hide();
         ui->padChild2->hide();
@@ -127,6 +133,7 @@ void MainWindow::bodyType(int index)
         ui->ab6->show();
 
     }else{ //Child
+        ui->GUIConsole->clear();
         ui->GUIConsole->append("Child Chosen");
         ui->pad1->hide();
         ui->pad2->hide();
@@ -137,6 +144,8 @@ void MainWindow::bodyType(int index)
         ui->pad1_3->hide();
         ui->pad1_4->hide();
         ui->pad1_5->hide();
+        ui->pad1_6->hide();
+        ui->pad1_7->hide();
 
         ui->BoobLeft->hide();
         ui->BoobRight->hide();
