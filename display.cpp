@@ -8,6 +8,7 @@ void Display::powerOn(){
     QTimer::singleShot(4000,this,&Display::batteriesCheck);
     QTimer::singleShot(5000,this,&Display::responsivenesCheck);
     QTimer::singleShot(8000,this,&Display::call911);
+    QTimer::singleShot(11000,this,&Display::placePad);
 }
 void Display::electrodesCheck(){
     d->setText("Electrodes Are Correctly Placed\n");
@@ -35,4 +36,9 @@ void Display::responsivenesCheck(){
 void Display::call911(){
     d->clear();
     d->setText("Calling 911...");
+}
+
+void Display::placePad(){
+    d->clear();
+    d->setText("Please place the correct pad");
 }
