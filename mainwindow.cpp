@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     heartRateMonitor = new HeartRateMonitor(ui->horizontalSlider, ui->currHeartRate, this);
+    ui->horizontalSlider->setSliderPosition(80);
     drainTimer = new QTimer(this);
     Display *d = new Display(ui->GUIConsole,this);
     processLabel = new QLabel(this);
@@ -56,9 +57,16 @@ MainWindow::MainWindow(QWidget *parent)
                     ui->shockDelivery->setEnabled(true);
                 }
             }
-        }else{
-            movie->setSpeed(ui->currHeartRate->toPlainText().toInt()*1.3);
+        }
+
+        else if (ui->currHeartRate->toPlainText().toInt() == 149)
+        {
             ui->GUIConsole->clear();
+        }
+
+        else{
+            movie->setSpeed(ui->currHeartRate->toPlainText().toInt()*1.3);
+//            ui->GUIConsole->clear();
             ui->shockDelivery->setEnabled(false);
         }
 
@@ -83,7 +91,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     // ui->CPR->setEnabled(false); //uncomment when ready to test
     ui->shockDelivery->setEnabled(false);
-    ui->contactShockDelivery->setEnabled(false);
+    // ui->placePadIncorrectly->setEnabled(false);
+    // ui->contactShockDelivery->setEnabled(false);
     ui->mouthToMouth->setEnabled(false);
     mouthToMouthReady = false;
 }
@@ -186,7 +195,8 @@ void MainWindow::power()
         movie->stop();
         drainTimer->stop();
         processLabel->clear();
-        ui->horizontalSlider->setValue(90);
+        ui->horizontalSlider->setValue(80);
+        ui->currHeartRate->setText("--");
         heartRateMonitor->stopOrStartMonitoring();
 
 
@@ -207,7 +217,7 @@ void MainWindow::power()
             processLabel->setGeometry(920,10,152,90);
             movie->setSpeed(100);
             movie->start();
-            drainTimer->start(1800);
+            drainTimer->start(500);
             heartRateMonitor->stopOrStartMonitoring();
 
         }
@@ -224,12 +234,13 @@ void MainWindow::drainBattery(){
     int currentValue= ui->batteryProgressBar->value();
     if(currentValue > 0){
        ui->batteryProgressBar->setValue(currentValue-1);
-        if (currentValue == 20) {
+        if (currentValue <= 20) {
            ui->GUIConsole->clear();
            ui->GUIConsole->append("BATTERY IS RUNNING LOW! PLEASE REPLACE BATTERY IMMEDIATELY.");
        }
     }else{
         drainTimer->stop();
+        disableAllButtons();
         power();
     }
 }
@@ -318,6 +329,26 @@ void MainWindow::performMouthtoMouth()  //press mouth to mouth button
     ui->GUIConsole->clear();
     ui->GUIConsole->append("Performing mouth to mouth..");
 }
+
+
+void MainWindow::disableAllButtons()
+{
+    ui->placePad->setEnabled(false);
+    ui->shockDelivery->setEnabled(false);
+    ui->CPR->setEnabled(false);
+    ui->mouthToMouth->setEnabled(false);
+    ui->horizontalSlider->setDisabled(true);
+    ui->electrodePadOption->setEnabled(false);
+    ui->placePadIncorrectly->setDisabled(true);
+    ui->contactShockDelivery->setDisabled(true);
+
+}
+
+
+
+
+
+
 
 
 
