@@ -50,6 +50,8 @@ private slots:
     void shockTimer();
     void shockTimerDelay();
     void disableAllButtons();
+    void AEDInitialLightUp();
+    void LightUpDelay();
 
 };
 #endif // MAINWINDOW_H
