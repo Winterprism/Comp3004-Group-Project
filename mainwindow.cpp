@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-
+    heartRateMonitor = new HeartRateMonitor(ui->horizontalSlider, ui->currHeartRate, this);
     drainTimer = new QTimer(this);
     Display *d = new Display(ui->GUIConsole,this);
     processLabel = new QLabel(this);
@@ -38,26 +38,28 @@ MainWindow::MainWindow(QWidget *parent)
     //prompt to deliver shock
     //press "Shock Delivery" button
 
-    QObject::connect(ui->horizontalSlider, &QSlider::valueChanged, [&]() {
-        ui->currHeartRate->setText(QString::number(ui->horizontalSlider->value()));
-
-        if (ui->electrodePadOption->currentText() == "Adult Pads"){
-            if (ui->horizontalSlider->value() > 150){
-                movie->setSpeed(600);
-                ui->GUIConsole->clear();
-                ui->GUIConsole->append("SHOCKABLE RHYTHM IDENTIFIED\n");
-                ui->GUIConsole->append("Shock advised\n");
-                ui->shockDelivery->setEnabled(true);
-            }
+    QObject::connect(ui->currHeartRate, &QTextEdit::textChanged, [&]() {
+        if (ui->currHeartRate->toPlainText().toInt() > 150){
+            if (ui->electrodePadOption->currentText() == "Adult Pads"){
+                    movie->setSpeed(ui->currHeartRate->toPlainText().toInt()*2);
+                    ui->GUIConsole->clear();
+                    ui->GUIConsole->append("SHOCKABLE RHYTHM IDENTIFIED\n");
+                    ui->GUIConsole->append("Shock advised\n");
+                    ui->shockDelivery->setEnabled(true);
         }
-        else {  //child pads selected
-            if (ui->horizontalSlider->value() > 200){
-                movie->setSpeed(600);
-                ui->GUIConsole->clear();
-                ui->GUIConsole->append("SHOCKABLE RHYTHM IDENTIFIED\n");
-                ui->GUIConsole->append("Shock advised\n");
-                ui->shockDelivery->setEnabled(true);
+            else {  //child pads selected
+                if (ui->currHeartRate->toPlainText().toInt() > 200){
+                    movie->setSpeed(ui->currHeartRate->toPlainText().toInt()*2);
+                    ui->GUIConsole->clear();
+                    ui->GUIConsole->append("SHOCKABLE RHYTHM IDENTIFIED\n");
+                    ui->GUIConsole->append("Shock advised\n");
+                    ui->shockDelivery->setEnabled(true);
+                }
             }
+        }else{
+            movie->setSpeed(ui->currHeartRate->toPlainText().toInt()*1.3);
+            ui->GUIConsole->clear();
+            ui->shockDelivery->setEnabled(false);
         }
 
     });
@@ -183,6 +185,10 @@ void MainWindow::power()
         drainTimer->stop();
         processLabel->clear();
         ui->horizontalSlider->setValue(90);
+        heartRateMonitor->stopOrStartMonitoring();
+
+
+
 
    }
    else{
@@ -200,13 +206,11 @@ void MainWindow::power()
             movie->setSpeed(100);
             movie->start();
             drainTimer->start(1800);
+            heartRateMonitor->stopOrStartMonitoring();
 
         }
 
    }
-
-
-}
 
 
 
