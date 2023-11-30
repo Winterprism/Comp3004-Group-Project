@@ -212,6 +212,7 @@ void MainWindow::power()
                 emit replaceB();
         else{
             emit powerOn();
+            AEDInitialLightUp();
             processLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
             processLabel->setMovie(movie);
             processLabel->setGeometry(920,10,152,90);
