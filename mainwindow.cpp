@@ -234,6 +234,29 @@ void MainWindow::drainBattery(){
     }
 }
 
+void MainWindow::shockTimer(){
+    if(padChoice == "Adult Pads"){
+        ui->pad1->setStyleSheet("border: 8px solid #555;background-color: rgb(192, 191, 188);border-color: rgb(255, 255, 0);");
+        ui->pad1_1->setStyleSheet("border: 8px solid #555;border-color: rgb(255, 255, 0);");
+        ui->pad4->setStyleSheet("border: 8px solid #555;background-color: rgb(192, 191, 188);border-color: rgb(255, 255, 0);");
+        ui->pad1_5->setStyleSheet("border: 8px solid #555;border-color: rgb(255, 255, 0);");
+
+    }else{
+        ui->padChild1->setStyleSheet("border: 8px solid #555;border-color: rgb(255, 255, 0);");
+    }
+}
+
+void MainWindow::shockTimerDelay(){
+    if(padChoice == "Adult Pads"){
+        ui->pad1->setStyleSheet("border: 8px solid #555;background-color: rgb(192, 191, 188);border-color: rgb(255, 255, 255);");
+        ui->pad1_1->setStyleSheet("border: 2px solid #555;border-color: rgb(255, 255, 255);");
+        ui->pad4->setStyleSheet("border: 8px solid #555;background-color: rgb(192, 191, 188);border-color: rgb(255, 255, 255);");
+        ui->pad1_5->setStyleSheet("border: 2px solid #555;border-color: rgb(255, 255, 255);");
+
+    }else{
+        ui->padChild1->setStyleSheet("background-color: rgb(94, 92, 100);");
+    }
+}
 
 //for later: a simulation button for someone being in contact with patient when shock is being delivered
 //idea: press shock delivery 3 times - 70/30 chance of survival ?
