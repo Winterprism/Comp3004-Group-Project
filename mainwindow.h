@@ -49,6 +49,7 @@ private slots:
     void performMouthtoMouth();
     void shockTimer();
     void shockTimerDelay();
+    void disableAllButtons();
 
 };
 #endif // MAINWINDOW_H
