@@ -1,11 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <QMainWindow>
 #include <QMainWindow>
 #include <QMovie>
 #include <QLabel>
+#include <random>
 #include "display.h"
 #include "cpr.h"
+#include "HeartRateMonitor.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -30,6 +32,7 @@ private:
     QLabel *processLabel;
     QMovie *movie;
     QTimer *drainTimer;
+    HeartRateMonitor *heartRateMonitor;
 
 private slots:
     void placePad();
