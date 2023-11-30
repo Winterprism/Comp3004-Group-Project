@@ -47,6 +47,8 @@ private slots:
     void cprPressed();
     void checkForMouthToMouthPress();
     void performMouthtoMouth();
+    void shockTimer();
+    void shockTimerDelay();
 
 };
 #endif // MAINWINDOW_H
