@@ -224,6 +224,10 @@ void MainWindow::drainBattery(){
     int currentValue= ui->batteryProgressBar->value();
     if(currentValue > 0){
        ui->batteryProgressBar->setValue(currentValue-1);
+        if (currentValue == 20) {
+           ui->GUIConsole->clear();
+           ui->GUIConsole->append("BATTERY IS RUNNING LOW! PLEASE REPLACE BATTERY IMMEDIATELY.");
+       }
     }else{
         drainTimer->stop();
         power();
