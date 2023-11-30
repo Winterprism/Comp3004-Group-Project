@@ -212,7 +212,7 @@ void MainWindow::power()
 
    }
 
-
+}
 
 void MainWindow::replaceBattery(){
     ui->batteryProgressBar->setValue(100);
