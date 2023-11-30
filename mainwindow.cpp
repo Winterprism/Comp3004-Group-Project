@@ -266,6 +266,13 @@ void MainWindow::shockDelivery()
     ui->GUIConsole->append("Shock Delivered\n");
 
     ui->contactShockDelivery->setEnabled(true);
+
+    QTimer::singleShot(0, this, &MainWindow::shockTimer);
+    QTimer::singleShot(1000, this, &MainWindow::shockTimerDelay);
+    QTimer::singleShot(2000, this, &MainWindow::shockTimer);
+    QTimer::singleShot(3000, this, &MainWindow::shockTimerDelay);
+    QTimer::singleShot(4000, this, &MainWindow::shockTimer);
+    QTimer::singleShot(5000, this, &MainWindow::shockTimerDelay);
 }
 
 
