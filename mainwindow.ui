@@ -330,8 +330,10 @@ border-color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid #555;
-border-color: rgb(255, 255, 255);</string>
+     <string notr="true">border: 8px solid #555;
+background-color: rgb(192, 191, 188);
+border-color: rgb(255, 255, 255);
+</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="pad4">
@@ -344,8 +346,10 @@ border-color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid #555;
-border-color: rgb(255, 255, 255);</string>
+     <string notr="true">border: 8px solid #555;
+background-color: rgb(192, 191, 188);
+border-color: rgb(255, 255, 255);
+</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="BoobLeft">
@@ -720,7 +724,8 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="styleSheet">
      <string notr="true">border: 8px solid #555;
-border-color: rgb(255, 255, 255);</string>
+border-color: rgb(192, 191, 188);
+background-color: rgb(192, 191, 188);</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="pad1_6">
@@ -734,7 +739,9 @@ border-color: rgb(255, 255, 255);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border: 8px solid #555;
-border-color: rgb(255, 255, 255);</string>
+border-color: rgb(192, 191, 188);
+background-color: rgb(192, 191, 188);
+</string>
     </property>
    </widget>
    <widget class="QPushButton" name="mouthToMouth">
