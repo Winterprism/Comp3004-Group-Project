@@ -32,6 +32,7 @@ private:
     QLabel *processLabel;
     QMovie *movie;
     QTimer *drainTimer;
+    bool mouthToMouthReady;
     HeartRateMonitor *heartRateMonitor;
 
 private slots:
@@ -44,6 +45,8 @@ private slots:
     void placePadIncorrectly();
     void patientContactDuringShockDelivery();
     void cprPressed();
+    void checkForMouthToMouthPress();
+    void performMouthtoMouth();
 
 };
 #endif // MAINWINDOW_H
