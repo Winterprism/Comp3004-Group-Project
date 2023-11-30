@@ -17,6 +17,8 @@ public slots:
     void powerOn();
     void powerOff();
     void replaceB();
+    void responsivenesCheck();
+    void call911();
 private:
     QTextEdit *d;
 };
