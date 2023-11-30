@@ -84,6 +84,8 @@ MainWindow::MainWindow(QWidget *parent)
     // ui->CPR->setEnabled(false); //uncomment when ready to test
     ui->shockDelivery->setEnabled(false);
     ui->contactShockDelivery->setEnabled(false);
+    ui->mouthToMouth->setEnabled(false);
+    mouthToMouthReady = false;
 }
 
 MainWindow::~MainWindow()
@@ -250,5 +252,39 @@ void MainWindow::cprPressed()
 {
     // ui->GUIConsole->clear();
     ui->GUIConsole->append("Performing CPR");
+    checkForMouthToMouthPress();
 }
+
+//here, set mouthtomouthready bool var to true
+//for every 10 cpr presses, check if press mouth to mouth was pressed once and only once
+//if mouth to mouth is pressed after 10 cpr presses, clear console and call performMouthtoMouth()
+    //flash green light on the indicator if this happens
+//if mouth to mouth not pressed after 10 cpr presses, display msg on gui saying it was not performed
+    //flash red light on the indicator if this happens
+
+void MainWindow::checkForMouthToMouthPress()
+{
+    QString guiText = ui->GUIConsole->toPlainText();
+    int cprCounter = guiText.count("Performing CPR");
+
+    if (cprCounter == 10){
+        mouthToMouthReady = true;
+        ui->mouthToMouth->setEnabled(true);
+    }
+    else if (cprCounter > 10) {
+        ui->GUIConsole->clear();
+        ui->GUIConsole->append("YOU DID NOT DO MOUTH TO MOUTH.");
+    }
+}
+
+
+void MainWindow::performMouthtoMouth()  //press mouth to mouth button
+{
+    ui->mouthToMouth->setEnabled(false);
+    ui->GUIConsole->clear();
+    ui->GUIConsole->append("Performing mouth to mouth..");
+}
+
+
+
 
