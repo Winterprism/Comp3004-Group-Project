@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->horizontalSlider->setSliderPosition(80);
     drainTimer = new QTimer(this);
     Display *d = new Display(ui->GUIConsole,this);
+    cpr = new CPR(ui->GUIConsole,this);
     processLabel = new QLabel(this);
     processLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
     movie = new QMovie("/home/student/Comp3004-Group-Project-main/heartBeat.gif");
@@ -296,8 +297,7 @@ void MainWindow::patientContactDuringShockDelivery()
 
 void MainWindow::cprPressed()
 {
-    // ui->GUIConsole->clear();
-    ui->GUIConsole->append("Performing CPR");
+    this->cpr->trackPresses();
     checkForMouthToMouthPress();
 }
 
