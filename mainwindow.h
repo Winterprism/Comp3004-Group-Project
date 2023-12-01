@@ -32,6 +32,7 @@ private:
     QLabel *processLabel;
     QMovie *movie;
     QTimer *drainTimer;
+    CPR *cpr;
     bool mouthToMouthReady;
     HeartRateMonitor *heartRateMonitor;
 
