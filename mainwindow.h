@@ -54,7 +54,7 @@ private slots:
     void AEDInitialLightUp();
     void LightUpDelay();
     void startUpLights();
-    void startUpLightsDelay();
+    
 
 };
 #endif // MAINWINDOW_H
