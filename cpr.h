@@ -1,19 +1,23 @@
 #ifndef CPR_H
 #define CPR_H
 
+#include <QObject>
+#include <QTextEdit>
+#include <QElapsedTimer>
 
-class CPR
+
+class CPR:public QObject
 {
+    Q_OBJECT
 public:
-    CPR();
-    void enable();
-    bool isEnabled();
-    void perform();
-    void stop();
+    explicit CPR(QTextEdit *display, QObject *parent = nullptr);
+    void trackPresses();
+    void analyzeInterval();
 
 private:
-    bool enabled;
-    bool isPerforming;
+    QTextEdit *d;
+    QElapsedTimer *timer;
+    int counter=0;
 };
 
 #endif // CPR_H
