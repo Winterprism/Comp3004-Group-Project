@@ -197,14 +197,22 @@ void MainWindow::power()
         ui->powerOn->setText("Power On");
         ui->powerOn->setStyleSheet("background-color: rgb(50, 205,50);");
         emit powerOff();
+       
         movie->stop();
         drainTimer->stop();
         processLabel->clear();
+       
         ui->horizontalSlider->setValue(80);
+       
         ui->currHeartRate->setText("--");
+       
         heartRateMonitor->stopOrStartMonitoring();
 
-
+        ui->checkResponseIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
+        ui->call911Indc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
+        ui->padPlacedIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
+        ui->shockDeliveredIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
+        ui->cprMouthIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
 
 
    }
@@ -218,6 +226,7 @@ void MainWindow::power()
         else{
             emit powerOn();
             AEDInitialLightUp();
+            enableAllButtons();
             processLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
             processLabel->setMovie(movie);
             processLabel->setGeometry(920,10,152,90);
@@ -353,6 +362,19 @@ void MainWindow::disableAllButtons()
     ui->contactShockDelivery->setDisabled(true);
 
 }
+
+void MainWindow::enableAllButtons()
+{
+    ui->placePad->setEnabled(true);
+    ui->shockDelivery->setEnabled(true);
+    ui->CPR->setEnabled(true);
+    ui->mouthToMouth->setEnabled(true);
+    ui->horizontalSlider->setDisabled(false);
+    ui->electrodePadOption->setEnabled(true);
+    ui->placePadIncorrectly->setDisabled(false);
+    ui->contactShockDelivery->setDisabled(false);
+}
+
 
 void MainWindow::AEDInitialLightUp()
 {
