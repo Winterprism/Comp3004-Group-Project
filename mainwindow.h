@@ -51,6 +51,7 @@ private slots:
     void shockTimer();
     void shockTimerDelay();
     void disableAllButtons();
+    void enableAllButtons();
     void AEDInitialLightUp();
     void lightUpDelay(int);
     void startUpLights();
