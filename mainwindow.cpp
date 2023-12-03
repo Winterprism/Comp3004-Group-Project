@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this,&MainWindow::powerOff, d,&Display::powerOff);
     connect(this,&MainWindow::replaceB, d,&Display::replaceB);
     connect(drainTimer, &QTimer::timeout, this, &MainWindow::drainBattery);
+    connect(cpr, SIGNAL(cpr->getIndcColor()), this, SLOT(receiveCPRIndc()));
 
     connect(ui->placePadIncorrectly,SIGNAL(released()), this, SLOT(placePadIncorrectly()));
     connect(ui->shockDelivery, SIGNAL(released()), this, SLOT(shockDelivery()));
@@ -315,8 +316,21 @@ void MainWindow::patientContactDuringShockDelivery()
 
 void MainWindow::cprPressed()
 {
+    this->cprClickedCounter++;
     this->cpr->trackPresses();
     checkForMouthToMouthPress();
+}
+
+void MainWindow::receiveCPRIndc()
+{
+    int color = this->cpr->getIndcColor();
+    if (color == 1){
+        //set color to red
+        ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
+    }else if (color == 2){
+        //set color to green
+        ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(51, 209, 122)");
+    }
 }
 
 //here, set mouthtomouthready bool var to true
@@ -328,14 +342,11 @@ void MainWindow::cprPressed()
 
 void MainWindow::checkForMouthToMouthPress()
 {
-    QString guiText = ui->GUIConsole->toPlainText();
-    int cprCounter = guiText.count("Performing CPR");
-
-    if (cprCounter == 10){
+    if (cprClickedCounter == 10){
         mouthToMouthReady = true;
         ui->mouthToMouth->setEnabled(true);
     }
-    else if (cprCounter > 10) {
+    else if (cprClickedCounter > 10) {
         ui->GUIConsole->clear();
         ui->GUIConsole->append("YOU DID NOT DO MOUTH TO MOUTH.");
     }
@@ -347,6 +358,7 @@ void MainWindow::performMouthtoMouth()  //press mouth to mouth button
     ui->mouthToMouth->setEnabled(false);
     ui->GUIConsole->clear();
     ui->GUIConsole->append("Performing mouth to mouth..");
+    this->cprClickedCounter = 0;
 }
 
 
