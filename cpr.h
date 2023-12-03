@@ -13,11 +13,13 @@ public:
     explicit CPR(QTextEdit *display, QObject *parent = nullptr);
     void trackPresses();
     void analyzeInterval();
+    int getIndcColor();
 
 private:
     QTextEdit *d;
     QElapsedTimer *timer;
     int counter=0;
+    int colorIndc = 0;
 };
 
 #endif // CPR_H
