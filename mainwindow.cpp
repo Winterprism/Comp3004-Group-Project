@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this,&MainWindow::powerOff, d,&Display::powerOff);
     connect(this,&MainWindow::replaceB, d,&Display::replaceB);
     connect(drainTimer, &QTimer::timeout, this, &MainWindow::drainBattery);
-    connect(cpr, SIGNAL(cpr->getIndcColor()), this, SLOT(receiveCPRIndc()));
+    connect(this, &MainWindow::getIndcColor, cpr, &CPR::getIndcColor);
 
     connect(ui->placePadIncorrectly,SIGNAL(released()), this, SLOT(placePadIncorrectly()));
     connect(ui->shockDelivery, SIGNAL(released()), this, SLOT(shockDelivery()));
@@ -45,17 +45,17 @@ MainWindow::MainWindow(QWidget *parent)
         if (ui->currHeartRate->toPlainText().toInt() > 150){
             if (ui->electrodePadOption->currentText() == "Adult Pads"){
                     movie->setSpeed(ui->currHeartRate->toPlainText().toInt()*2);
-                    ui->GUIConsole->clear();
-                    ui->GUIConsole->append("SHOCKABLE RHYTHM IDENTIFIED\n");
-                    ui->GUIConsole->append("Shock advised\n");
+//                    ui->GUIConsole->clear();
+//                    ui->GUIConsole->append("SHOCKABLE RHYTHM IDENTIFIED\n");
+//                    ui->GUIConsole->append("Shock advised\n");
                     ui->shockDelivery->setEnabled(true);
         }
             else {  //child pads selected
                 if (ui->currHeartRate->toPlainText().toInt() > 200){
                     movie->setSpeed(ui->currHeartRate->toPlainText().toInt()*2);
-                    ui->GUIConsole->clear();
-                    ui->GUIConsole->append("SHOCKABLE RHYTHM IDENTIFIED\n");
-                    ui->GUIConsole->append("Shock advised\n");
+//                    ui->GUIConsole->clear();
+//                    ui->GUIConsole->append("SHOCKABLE RHYTHM IDENTIFIED\n");
+//                    ui->GUIConsole->append("Shock advised\n");
                     ui->shockDelivery->setEnabled(true);
                 }
             }
@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         else if (ui->currHeartRate->toPlainText().toInt() == 149)
         {
-            ui->GUIConsole->clear();
+//            ui->GUIConsole->clear();
         }
 
         else{
@@ -91,7 +91,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pad1_6->hide();
     ui->pad1_7->hide();
 
-    // ui->CPR->setEnabled(false); //uncomment when ready to test
+    ui->CPR->setEnabled(false); //uncomment when ready to test
     ui->shockDelivery->setEnabled(false);
     // ui->placePadIncorrectly->setEnabled(false);
     // ui->contactShockDelivery->setEnabled(false);
@@ -319,6 +319,22 @@ void MainWindow::cprPressed()
     this->cprClickedCounter++;
     this->cpr->trackPresses();
     checkForMouthToMouthPress();
+    if (cprClickedCounter == 1){
+        alternateCPRIndc();
+    }else{
+        emit getIndcColor();
+        this->receiveCPRIndc();
+    }
+}
+
+void MainWindow::alternateCPRIndc()
+{
+    while(true){
+        ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(51, 209, 122)");
+        lightUpDelay(1);
+        ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
+        lightUpDelay(1);
+    }
 }
 
 void MainWindow::receiveCPRIndc()
@@ -326,10 +342,20 @@ void MainWindow::receiveCPRIndc()
     int color = this->cpr->getIndcColor();
     if (color == 1){
         //set color to red
-        ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
+        for (int i=0; i<3; i++){
+            ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
+            lightUpDelay(1);
+            ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px");
+            lightUpDelay(1);
+        }
     }else if (color == 2){
         //set color to green
-        ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(51, 209, 122)");
+        for (int i=0; i<3; i++){
+            ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(51, 209, 122)");
+            lightUpDelay(1);
+            ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px");
+            lightUpDelay(1);
+        }
     }
 }
 
@@ -428,10 +454,3 @@ void MainWindow::startUpLights()
     ui->cprMouthIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
 
 }
-
-
-
-
-
-
-
