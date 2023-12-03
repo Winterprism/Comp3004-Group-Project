@@ -35,6 +35,7 @@ private:
     CPR *cpr;
     bool mouthToMouthReady;
     HeartRateMonitor *heartRateMonitor;
+    int cprClickedCounter = 0;
 
 private slots:
     void placePad();
@@ -46,6 +47,7 @@ private slots:
     void placePadIncorrectly();
     void patientContactDuringShockDelivery();
     void cprPressed();
+    void receiveCPRIndc();
     void checkForMouthToMouthPress();
     void performMouthtoMouth();
     void shockTimer();
