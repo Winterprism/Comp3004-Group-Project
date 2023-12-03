@@ -14,13 +14,15 @@ CPR::CPR(QTextEdit *display, QObject *parent):QObject(parent), d(display)
 void CPR::trackPresses(){
     if (counter == 0) {
         timer->start();
-        d->append("Performing CPR\n");
     }
 
     if (!timer->hasExpired(9000)) {
         counter++;
+        d->clear();
+        d->append("CPR pressed " + QString::number(counter) + " times\n");
     }else{
         this->analyzeInterval();
+        counter = 0;
     }
 }
 
@@ -43,7 +45,6 @@ void CPR::analyzeInterval(){
         colorIndc = 2;
         getIndcColor(); //green
     }
-    counter = 0;
 }
 
 int CPR::getIndcColor(){
