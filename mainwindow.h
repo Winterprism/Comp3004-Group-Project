@@ -26,6 +26,7 @@ signals:
     void powerOn();
     void powerOff();
     void replaceB();
+    int getIndcColor();
 
 private:
     Ui::MainWindow *ui;
@@ -36,6 +37,8 @@ private:
     bool mouthToMouthReady;
     HeartRateMonitor *heartRateMonitor;
     int cprClickedCounter = 0;
+    void alternateCPRIndc();
+    void receiveCPRIndc();
 
 private slots:
     void placePad();
@@ -47,7 +50,6 @@ private slots:
     void placePadIncorrectly();
     void patientContactDuringShockDelivery();
     void cprPressed();
-    void receiveCPRIndc();
     void checkForMouthToMouthPress();
     void performMouthtoMouth();
     void shockTimer();
