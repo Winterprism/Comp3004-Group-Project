@@ -13,6 +13,7 @@ public:
     explicit CPR(QTextEdit *display, QObject *parent = nullptr);
     void trackPresses();
     void analyzeInterval();
+    void resetCounter();
 
 public slots:
     int getIndcColor();
