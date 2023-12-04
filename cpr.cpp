@@ -16,10 +16,12 @@ void CPR::trackPresses(){
         timer->start();
     }
 
-    if (!timer->hasExpired(9000)) {
+    d->clear();
+    d->append("CPR pressed " + QString::number(counter+1) + " times in last " +
+              QString::number(timer->elapsed() / 1000) + " seconds\n");
+
+    if (!timer->hasExpired(9300)) {
         counter++;
-        d->clear();
-        d->append("CPR pressed " + QString::number(counter) + " times\n");
     }else{
         this->analyzeInterval();
         counter = 0;
@@ -49,4 +51,8 @@ void CPR::analyzeInterval(){
 
 int CPR::getIndcColor(){
     return colorIndc;
+}
+
+void CPR::resetCounter(){
+    counter = 0;
 }
