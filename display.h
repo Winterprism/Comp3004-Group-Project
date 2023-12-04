@@ -19,6 +19,7 @@ public slots:
     void replaceB();
     void responsivenesCheck();
     void call911();
+    void heartIsStopped();
     void placePad();
 private:
     QTextEdit *d;
