@@ -24,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->powerOn,SIGNAL(released()), this, SLOT(power()));
     connect(ui->replaceBattery,SIGNAL(released()), this, SLOT(replaceBattery()));
     connect(ui->CPR, SIGNAL(released()), this, SLOT(cprPressed()));
+    connect(ui->mouthToMouth, SIGNAL(released()), this, SLOT(performMouthtoMouth()));
+
     connect(this,&MainWindow::powerOn, d,&Display::powerOn);
     connect(this,&MainWindow::powerOff, d,&Display::powerOff);
     connect(this,&MainWindow::replaceB, d,&Display::replaceB);
@@ -216,8 +218,10 @@ void MainWindow::power()
         ui->padPlacedIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
         ui->shockDeliveredIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
         ui->cprMouthIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
+        ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
 
-
+        cpr->resetCounter();
+        this->cprClickedCounter = 0;
    }
    else{
         ui->powerOn->setText("Power Off");
@@ -237,7 +241,8 @@ void MainWindow::power()
             movie->start();
             drainTimer->start(500);
             heartRateMonitor->stopOrStartMonitoring();
-
+            ui->CPR->setEnabled(false);
+            ui->mouthToMouth->setEnabled(false);
         }
 
    }
@@ -306,7 +311,7 @@ void MainWindow::shockDelivery()
     lightUpDelay(4);
     ui->shockDeliveredIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
     ui->cprMouthIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
-
+    ui->CPR->setEnabled(true);
 }
 
 
@@ -331,7 +336,7 @@ void MainWindow::cprPressed()
 
 void MainWindow::alternateCPRIndc()
 {
-    while(true){
+    while(cprClickedCounter < 10){
         ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(51, 209, 122)");
         lightUpDelay(1);
         ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
@@ -375,7 +380,7 @@ void MainWindow::checkForMouthToMouthPress()
         ui->mouthToMouth->setEnabled(true);
     }
     else if (cprClickedCounter > 10) {
-        ui->GUIConsole->clear();
+//        ui->GUIConsole->clear();
         ui->GUIConsole->append("YOU DID NOT DO MOUTH TO MOUTH.");
     }
 }
@@ -383,6 +388,7 @@ void MainWindow::checkForMouthToMouthPress()
 
 void MainWindow::performMouthtoMouth()  //press mouth to mouth button
 {
+    mouthToMouthReady = false;
     ui->mouthToMouth->setEnabled(false);
     ui->GUIConsole->clear();
     ui->GUIConsole->append("Performing mouth to mouth..");
@@ -475,7 +481,3 @@ void MainWindow::patientHeartStopped()
     exit(0);
 
 }
-
-
-
-
