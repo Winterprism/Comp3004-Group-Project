@@ -38,6 +38,12 @@ void Display::call911(){
     d->setText("Calling 911...");
 }
 
+void Display::heartIsStopped()
+{
+    d->clear();
+    d->setText("PATIENT'S HEART IS STOPPED!!!");
+}
+
 void Display::placePad(){
     d->clear();
     d->setText("Please place the correct pad");
