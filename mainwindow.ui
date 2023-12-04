@@ -997,6 +997,19 @@ padding: 5px;
 </string>
     </property>
    </widget>
+   <widget class="QPushButton" name="heartIsStopped">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>630</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Patient heart is stopped</string>
+    </property>
+   </widget>
    <zorder>AEDDisplay</zorder>
    <zorder>textEdit</zorder>
    <zorder>GUIConsole</zorder>
@@ -1060,6 +1073,7 @@ padding: 5px;
    <zorder>shockDeliveredIndc</zorder>
    <zorder>cprMouthIndc</zorder>
    <zorder>cprMouthIndc_2</zorder>
+   <zorder>heartIsStopped</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
