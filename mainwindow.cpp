@@ -27,13 +27,15 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this,&MainWindow::powerOn, d,&Display::powerOn);
     connect(this,&MainWindow::powerOff, d,&Display::powerOff);
     connect(this,&MainWindow::replaceB, d,&Display::replaceB);
+    connect(this,&MainWindow::heartIsStopped, d,&Display::heartIsStopped);
+    connect(this,&MainWindow::call911, d,&Display::call911);    
     connect(drainTimer, &QTimer::timeout, this, &MainWindow::drainBattery);
     connect(this, &MainWindow::getIndcColor, cpr, &CPR::getIndcColor);
 
     connect(ui->placePadIncorrectly,SIGNAL(released()), this, SLOT(placePadIncorrectly()));
     connect(ui->shockDelivery, SIGNAL(released()), this, SLOT(shockDelivery()));
     connect(ui->contactShockDelivery, SIGNAL(released()), this, SLOT(patientContactDuringShockDelivery()));
-
+    connect(ui->heartIsStopped, SIGNAL(released()), this, SLOT(patientHeartStopped()));
 
 
     //heart rate modifier using slider
@@ -454,3 +456,26 @@ void MainWindow::startUpLights()
     ui->cprMouthIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
 
 }
+
+void MainWindow::patientHeartStopped()
+{
+    ui->checkResponseIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
+    lightUpDelay(3);
+    ui->checkResponseIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
+    emit heartIsStopped();
+    lightUpDelay(3);
+    ui->call911Indc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
+    emit call911();
+    lightUpDelay(3);
+    ui->call911Indc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
+    lightUpDelay(3);
+    ui->call911Indc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
+    ui->GUIConsole->append("Exiting program...");
+    lightUpDelay(2);
+    exit(0);
+
+}
+
+
+
+
