@@ -27,6 +27,8 @@ signals:
     void powerOff();
     void replaceB();
     int getIndcColor();
+    void call911();
+    void heartIsStopped();
 
 private:
     Ui::MainWindow *ui;
@@ -59,6 +61,7 @@ private slots:
     void AEDInitialLightUp();
     void lightUpDelay(int);
     void startUpLights();
+    void patientHeartStopped();
     
 
 };
