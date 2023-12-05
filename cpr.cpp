@@ -16,10 +16,6 @@ void CPR::trackPresses(){
         timer->start();
     }
 
-    d->clear();
-    d->append("CPR pressed " + QString::number(counter+1) + " times in last " +
-              QString::number(timer->elapsed() / 1000) + " seconds\n");
-
     if (!timer->hasExpired(9300)) {
         counter++;
     }else{
@@ -32,12 +28,12 @@ void CPR::analyzeInterval(){
     //Assuming the interval is 10 seconds
 
     // when pressing speed is too fast (>=5)
-    if (counter > 15) {
+    if (counter >= 15) {
         d->append("Slow down!\n");
         colorIndc = 1;
         getIndcColor(); //red
     } //when pressing speed is too slow (<=1)
-    else if (counter < 5){
+    else if (counter <= 5){
         d->append("Press faster\n");
         colorIndc = 1;
         getIndcColor(); //red
@@ -55,4 +51,6 @@ int CPR::getIndcColor(){
 
 void CPR::resetCounter(){
     counter = 0;
+    colorIndc = 0;
+    getIndcColor();
 }
