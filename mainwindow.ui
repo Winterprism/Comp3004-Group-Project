@@ -47,7 +47,7 @@
     <property name="geometry">
      <rect>
       <x>920</x>
-      <y>250</y>
+      <y>240</y>
       <width>301</width>
       <height>161</height>
      </rect>
@@ -641,7 +641,7 @@ border-color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>920</x>
-      <y>430</y>
+      <y>410</y>
       <width>141</width>
       <height>17</height>
      </rect>
@@ -654,7 +654,7 @@ border-color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>1070</x>
-      <y>430</y>
+      <y>410</y>
       <width>160</width>
       <height>16</height>
      </rect>
@@ -997,17 +997,29 @@ padding: 5px;
 </string>
     </property>
    </widget>
-   <widget class="QPushButton" name="heartIsStopped">
+   <widget class="QTextEdit" name="shockAdvised">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>630</y>
-      <width>201</width>
+      <x>920</x>
+      <y>440</y>
+      <width>311</width>
       <height>41</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Patient heart is stopped</string>
+    <property name="styleSheet">
+     <string notr="true">font: 20pt;
+color: rgb(192, 191, 188);
+background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="readOnly">
+     <bool>false</bool>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:20pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'DejaVu Sans'; font-weight:600;&quot;&gt;SHOCK ADVISED&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <zorder>AEDDisplay</zorder>
@@ -1073,7 +1085,7 @@ padding: 5px;
    <zorder>shockDeliveredIndc</zorder>
    <zorder>cprMouthIndc</zorder>
    <zorder>cprMouthIndc_2</zorder>
-   <zorder>heartIsStopped</zorder>
+   <zorder>shockAdvised</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
