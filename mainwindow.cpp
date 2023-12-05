@@ -292,7 +292,7 @@ void MainWindow::shockDelivery()
 {
     ui->GUIConsole->clear();
     ui->GUIConsole->append("Shock Delivered\n");
-    ui->shockAdvised->setStyleSheet("font: 20pt;background-color: rgb(255, 255, 255);");
+    ui->shockAdvised->setStyleSheet("font: 20pt;color: rgb(192, 191, 188);background-color: rgb(255, 255, 255);");
     shockPerformed = true;
     ui->contactShockDelivery->setEnabled(true);
 
@@ -401,6 +401,7 @@ void MainWindow::disableAllButtons()
     ui->electrodePadOption->setEnabled(false);
     ui->placePadIncorrectly->setDisabled(true);
     ui->contactShockDelivery->setDisabled(true);
+    ui->heartIsStopped->setDisabled(true);
 
 }
 
@@ -413,6 +414,7 @@ void MainWindow::enableAllButtons()
     ui->electrodePadOption->setEnabled(true);
     ui->placePadIncorrectly->setDisabled(false);
     ui->contactShockDelivery->setDisabled(false);
+    ui->heartIsStopped->setDisabled(false);
 }
 
 
