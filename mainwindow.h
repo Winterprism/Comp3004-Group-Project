@@ -31,6 +31,7 @@ signals:
     void heartIsStopped();
 
 private:
+    bool powerIsOn = false;
     Ui::MainWindow *ui;
     QLabel *processLabel;
     QMovie *movie;
