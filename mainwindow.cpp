@@ -191,6 +191,8 @@ void MainWindow::placePadIncorrectly()
 void MainWindow::power()
 {
    if(ui->powerOn->text() == "Power Off"){
+       //turn off AED
+       this->powerIsOn = false;
         ui->powerOn->setText("Power On");
         ui->powerOn->setStyleSheet("background-color: rgb(50, 205,50);");
         emit powerOff();
@@ -212,12 +214,13 @@ void MainWindow::power()
         ui->padPlacedIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
         ui->shockDeliveredIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
         ui->cprMouthIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
-        ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
 
         cpr->resetCounter();
         this->cprClickedCounter = 0;
    }
    else{
+       // turn on AED
+       this->powerIsOn = true;
         ui->powerOn->setText("Power Off");
         ui->powerOn->setStyleSheet("background-color: rgb(205, 50,50);");
         int PBV = ui->batteryProgressBar->value();
@@ -306,6 +309,8 @@ void MainWindow::shockDelivery()
     lightUpDelay(4);
     ui->shockDeliveredIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
     ui->cprMouthIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
+    ui->GUIConsole->clear();
+    ui->GUIConsole->append("PERFORM CPR NOW");
     ui->CPR->setEnabled(true);
 }
 
@@ -319,6 +324,8 @@ void MainWindow::patientContactDuringShockDelivery()
 void MainWindow::cprPressed()
 {
     this->cprClickedCounter++;
+    ui->GUIConsole->clear();
+    ui->GUIConsole->append("CPR pressed " + QString::number(cprClickedCounter) + " times\n");
     this->cpr->trackPresses();
     checkForMouthToMouthPress();
     if (cprClickedCounter == 1){
@@ -331,7 +338,11 @@ void MainWindow::cprPressed()
 
 void MainWindow::alternateCPRIndc()
 {
-    while(cprClickedCounter < 10){
+    while(true){
+        if (!powerIsOn){
+            ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
+            break;
+        }
         ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(51, 209, 122)");
         lightUpDelay(1);
         ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
@@ -345,6 +356,10 @@ void MainWindow::receiveCPRIndc()
     if (color == 1){
         //set color to red
         for (int i=0; i<3; i++){
+            if (!powerIsOn){
+                ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
+                break;
+            }
             ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
             lightUpDelay(1);
             ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px");
@@ -353,6 +368,10 @@ void MainWindow::receiveCPRIndc()
     }else if (color == 2){
         //set color to green
         for (int i=0; i<3; i++){
+            if (!powerIsOn){
+                ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
+                break;
+            }
             ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(51, 209, 122)");
             lightUpDelay(1);
             ui->cprMouthIndc_2->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px");
@@ -373,6 +392,7 @@ void MainWindow::checkForMouthToMouthPress()
     if (cprClickedCounter == 10){
         mouthToMouthReady = true;
         ui->mouthToMouth->setEnabled(true);
+        ui->GUIConsole->append("PERFORM MOUTH TO MOUTH NOW");
     }
     else if (cprClickedCounter > 10) {
 //        ui->GUIConsole->clear();
@@ -486,4 +506,3 @@ void MainWindow::shockAdvised()
         ui->shockAdvised->setStyleSheet("font: 20pt;color: rgb(192, 191, 188);background-color: rgb(255, 255, 255);");
     }
 }
-
