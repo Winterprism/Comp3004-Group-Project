@@ -1022,6 +1022,19 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'DejaVu Sans'; font-weight:600;&quot;&gt;SHOCK ADVISED&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="heartIsStopped">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>630</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Pattient Heart is Stopped</string>
+    </property>
+   </widget>
    <zorder>AEDDisplay</zorder>
    <zorder>textEdit</zorder>
    <zorder>GUIConsole</zorder>
@@ -1086,6 +1099,7 @@ p, li { white-space: pre-wrap; }
    <zorder>cprMouthIndc</zorder>
    <zorder>cprMouthIndc_2</zorder>
    <zorder>shockAdvised</zorder>
+   <zorder>heartIsStopped</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
