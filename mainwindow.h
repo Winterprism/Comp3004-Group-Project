@@ -41,6 +41,7 @@ private:
     int cprClickedCounter = 0;
     void alternateCPRIndc();
     void receiveCPRIndc();
+    bool shockPerformed = false;
 
 private slots:
     void placePad();
@@ -62,7 +63,7 @@ private slots:
     void lightUpDelay(int);
     void startUpLights();
     void patientHeartStopped();
-    
+    void shockAdvised();
 
 };
 #endif // MAINWINDOW_H
