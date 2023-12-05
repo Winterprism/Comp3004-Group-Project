@@ -49,17 +49,13 @@ MainWindow::MainWindow(QWidget *parent)
         if (ui->currHeartRate->toPlainText().toInt() > 150){
             if (ui->electrodePadOption->currentText() == "Adult Pads"){
                     movie->setSpeed(ui->currHeartRate->toPlainText().toInt()*2);
-//                    ui->GUIConsole->clear();
-//                    ui->GUIConsole->append("SHOCKABLE RHYTHM IDENTIFIED\n");
-//                    ui->GUIConsole->append("Shock advised\n");
+                    shockAdvised();
                     ui->shockDelivery->setEnabled(true);
         }
             else {  //child pads selected
                 if (ui->currHeartRate->toPlainText().toInt() > 200){
                     movie->setSpeed(ui->currHeartRate->toPlainText().toInt()*2);
-//                    ui->GUIConsole->clear();
-//                    ui->GUIConsole->append("SHOCKABLE RHYTHM IDENTIFIED\n");
-//                    ui->GUIConsole->append("Shock advised\n");
+                    shockAdvised();
                     ui->shockDelivery->setEnabled(true);
                 }
             }
@@ -184,11 +180,7 @@ void MainWindow::bodyType(int index)
 void MainWindow::placePadIncorrectly()
 {
     padChoice = ui->electrodePadOption->currentText();
-    if(padChoice == "Adult Pads"){
-
-    }else{
-
-    }
+    
 
     ui->GUIConsole->clear();
     ui->GUIConsole->append(padChoice + " are placed Incorrectly");
@@ -210,6 +202,8 @@ void MainWindow::power()
         ui->horizontalSlider->setValue(80);
        
         ui->currHeartRate->setText("--");
+
+        ui->shockAdvised->setStyleSheet("font: 20pt;background-color: rgb(255, 255, 255);");
        
         heartRateMonitor->stopOrStartMonitoring();
 
@@ -296,9 +290,10 @@ void MainWindow::shockTimerDelay(){
 //idea: press shock delivery 3 times - 70/30 chance of survival ?
 void MainWindow::shockDelivery()
 {
-
+    ui->GUIConsole->clear();
     ui->GUIConsole->append("Shock Delivered\n");
-
+    ui->shockAdvised->setStyleSheet("font: 20pt;background-color: rgb(255, 255, 255);");
+    shockPerformed = true;
     ui->contactShockDelivery->setEnabled(true);
 
     QTimer::singleShot(0, this, &MainWindow::shockTimer);
@@ -412,7 +407,6 @@ void MainWindow::disableAllButtons()
 void MainWindow::enableAllButtons()
 {
     ui->placePad->setEnabled(true);
-    ui->shockDelivery->setEnabled(true);
     ui->CPR->setEnabled(true);
     ui->mouthToMouth->setEnabled(true);
     ui->horizontalSlider->setDisabled(false);
@@ -481,3 +475,13 @@ void MainWindow::patientHeartStopped()
     exit(0);
 
 }
+
+void MainWindow::shockAdvised()
+{
+    if(shockPerformed == false){
+        ui->shockAdvised->setStyleSheet("font: 20pt;color: rgb(0, 0, 0);background-color: rgb(249, 240, 107);");
+        lightUpDelay(1);
+        ui->shockAdvised->setStyleSheet("font: 20pt;color: rgb(192, 191, 188);background-color: rgb(255, 255, 255);");
+    }
+}
+
