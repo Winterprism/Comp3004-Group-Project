@@ -21,8 +21,15 @@ public slots:
     void call911();
     void heartIsStopped();
     void placePad();
+    void updateDisplay();
+    void stable();
+    void startSelfTest();
 private:
+    bool interrupt;
     QTextEdit *d;
+    int currentStep;
+    QStringList steps;
+    QTimer *timer;
 };
 
 #endif // DISPLAY_Ha

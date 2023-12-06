@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     heartRateMonitor = new HeartRateMonitor(ui->horizontalSlider, ui->currHeartRate, this);
     ui->horizontalSlider->setSliderPosition(80);
     drainTimer = new QTimer(this);
+    heartRateTimer = new QTimer(this);
     Display *d = new Display(ui->GUIConsole,this);
     cpr = new CPR(ui->GUIConsole,this);
     processLabel = new QLabel(this);
@@ -25,13 +26,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->replaceBattery,SIGNAL(released()), this, SLOT(replaceBattery()));
     connect(ui->CPR, SIGNAL(released()), this, SLOT(cprPressed()));
     connect(ui->mouthToMouth, SIGNAL(released()), this, SLOT(performMouthtoMouth()));
-
+    connect(this,&MainWindow::stable, d,&Display::stable);
     connect(this,&MainWindow::powerOn, d,&Display::powerOn);
     connect(this,&MainWindow::powerOff, d,&Display::powerOff);
     connect(this,&MainWindow::replaceB, d,&Display::replaceB);
     connect(this,&MainWindow::heartIsStopped, d,&Display::heartIsStopped);
     connect(this,&MainWindow::call911, d,&Display::call911);    
     connect(drainTimer, &QTimer::timeout, this, &MainWindow::drainBattery);
+    connect(heartRateTimer, &QTimer::timeout, this, &MainWindow::heartRateChanger);
     connect(this, &MainWindow::getIndcColor, cpr, &CPR::getIndcColor);
 
     connect(ui->placePadIncorrectly,SIGNAL(released()), this, SLOT(placePadIncorrectly()));
@@ -188,6 +190,20 @@ void MainWindow::placePadIncorrectly()
 
 }
 
+
+void MainWindow::heartRateChanger(){
+    int HR = 70;
+    int currentValue= ui->horizontalSlider->value();
+    if(currentValue > HR ){
+        ui->horizontalSlider->setValue(currentValue-1);
+    }
+    else if (currentValue < HR){
+        ui->horizontalSlider->setValue(currentValue+1);
+    }else{
+        heartRateTimer->stop();
+    }
+}
+
 void MainWindow::power()
 {
    if(ui->powerOn->text() == "Power Off"){
@@ -220,7 +236,6 @@ void MainWindow::power()
    }
    else{
        // turn on AED
-       this->powerIsOn = true;
         ui->powerOn->setText("Power Off");
         ui->powerOn->setStyleSheet("background-color: rgb(205, 50,50);");
         int PBV = ui->batteryProgressBar->value();
@@ -228,6 +243,7 @@ void MainWindow::power()
 //                ui->powerOn->setText(QString::number(PBV));
                 emit replaceB();
         else{
+            this->powerIsOn = true;
             emit powerOn();
             AEDInitialLightUp();
             enableAllButtons();
@@ -298,6 +314,7 @@ void MainWindow::shockDelivery()
     ui->shockAdvised->setStyleSheet("font: 20pt;color: rgb(192, 191, 188);background-color: rgb(255, 255, 255);");
     shockPerformed = true;
     ui->contactShockDelivery->setEnabled(true);
+    heartRateTimer->start(100);
 
     QTimer::singleShot(0, this, &MainWindow::shockTimer);
     QTimer::singleShot(1000, this, &MainWindow::shockTimerDelay);

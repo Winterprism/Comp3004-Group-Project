@@ -29,12 +29,14 @@ signals:
     int getIndcColor();
     void call911();
     void heartIsStopped();
+    void stable();
 
 private:
     bool powerIsOn = false;
     Ui::MainWindow *ui;
     QLabel *processLabel;
     QMovie *movie;
+    QTimer *heartRateTimer;
     QTimer *drainTimer;
     CPR *cpr;
     bool mouthToMouthReady;
@@ -65,6 +67,7 @@ private slots:
     void startUpLights();
     void patientHeartStopped();
     void shockAdvised();
+    void heartRateChanger();
 
 };
 #endif // MAINWINDOW_H
