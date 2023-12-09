@@ -46,9 +46,9 @@
    <widget class="QTextEdit" name="GUIConsole">
     <property name="geometry">
      <rect>
-      <x>920</x>
+      <x>910</x>
       <y>240</y>
-      <width>301</width>
+      <width>331</width>
       <height>161</height>
      </rect>
     </property>
@@ -672,9 +672,9 @@ border-color: rgb(255, 255, 255);</string>
    <widget class="QTextEdit" name="currHeartRate">
     <property name="geometry">
      <rect>
-      <x>1110</x>
+      <x>1100</x>
       <y>50</y>
-      <width>71</width>
+      <width>91</width>
       <height>41</height>
      </rect>
     </property>

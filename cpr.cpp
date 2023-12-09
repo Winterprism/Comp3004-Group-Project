@@ -1,8 +1,13 @@
 #include "cpr.h"
 
-CPR::CPR(QTextEdit *display, QObject *parent):QObject(parent), d(display)
+CPR::CPR(QTextEdit *d,QPushButton *cpr ,QTextEdit *led,QObject *parent):QObject(parent), display(d),c(cpr), led(led),currentTime(0),counter(0),i(0)
 {
-    this->timer = new QElapsedTimer();
+    connect(c, SIGNAL(released()), this, SLOT(trackPresses()));
+    timer = new QElapsedTimer();
+    timer2 = new QElapsedTimer();
+    lightTimer = new QTimer(this);
+    lightTimer->setInterval(1000);
+    connect(lightTimer, &QTimer::timeout, this, &CPR::lights);
 }
 
 /* Button press interval:
@@ -12,45 +17,57 @@ CPR::CPR(QTextEdit *display, QObject *parent):QObject(parent), d(display)
 */
 
 void CPR::trackPresses(){
+    lightTimer->start();
+    led->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
+    display->clear();
+    display->append("CPR pressed " + QString::number(counter) + " times\n");
     if (counter == 0) {
         timer->start();
+        lightTimer->start(1000);
     }
+    counter++;
+    i++;
+    if (timer->elapsed() >= 3000) {
+        if(i < 2){
+            display->append("Press faster\n");
+        }
+        else if (i >= 5) {
+               display->append("Slow down!\n");
+        }else{
 
-    if (!timer->hasExpired(9300)) {
-        counter++;
-    }else{
-        this->analyzeInterval();
+            display->append("CPR performing well\n");
+        }
+        i = 0;
+        timer->restart();
+
+    }if(counter == 11){
+        emit countReachedTen();
         counter = 0;
+        timer->restart();
+        lightTimer->stop();
+        led->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
+
     }
 }
 
-void CPR::analyzeInterval(){
-    //Assuming the interval is 10 seconds
+void CPR::lights(){
+     led->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(51, 209, 122)");
+//    if(colorIndc  == 1){
+//        led->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(51, 209, 122)");
+//        colorIndc--;
+//    }
+//    else if(colorIndc  == 0){
+//        led->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
+//        colorIndc++;
+//    }
 
-    // when pressing speed is too fast (>=5)
-    if (counter >= 15) {
-        d->append("Slow down!\n");
-        colorIndc = 1;
-        getIndcColor(); //red
-    } //when pressing speed is too slow (<=1)
-    else if (counter <= 5){
-        d->append("Press faster\n");
-        colorIndc = 1;
-        getIndcColor(); //red
-    } //when pressing speed is just right
-    else{
-        d->append("CPR performing well\n");
-        colorIndc = 2;
-        getIndcColor(); //green
-    }
 }
 
-int CPR::getIndcColor(){
-    return colorIndc;
+void CPR::resetLight() {
+     led->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(51, 209, 122)");
 }
 
-void CPR::resetCounter(){
-    counter = 0;
-    colorIndc = 0;
-    getIndcColor();
+void CPR:: updateTimer(){
+    currentTime++;
+    lcdNumber->display(currentTime);
 }

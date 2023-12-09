@@ -1,6 +1,6 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
-
+#include "mainwindow.h"
 #include <QObject>
 #include <QTextEdit>
 #include <QTimer>
@@ -17,13 +17,12 @@ public slots:
     void powerOn();
     void powerOff();
     void replaceB();
-    void responsivenesCheck();
     void call911();
     void heartIsStopped();
-    void placePad();
+    void checkRes();
+    void placeP();
     void updateDisplay();
     void stable();
-    void startSelfTest();
 private:
     bool interrupt;
     QTextEdit *d;

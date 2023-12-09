@@ -21,7 +21,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    QString padChoice;
 signals:
     void powerOn();
     void powerOff();
@@ -30,22 +29,23 @@ signals:
     void call911();
     void heartIsStopped();
     void stable();
+    void checkRes();
+    void placeP();
 
 private:
+    QString padChoice;
     bool powerIsOn = false;
     Ui::MainWindow *ui;
     QLabel *processLabel;
     QMovie *movie;
     QTimer *heartRateTimer;
     QTimer *drainTimer;
-    CPR *cpr;
     bool mouthToMouthReady;
     HeartRateMonitor *heartRateMonitor;
     int cprClickedCounter = 0;
-    void alternateCPRIndc();
-    void receiveCPRIndc();
+//    void alternateCPRIndc();
+//    void receiveCPRIndc();
     bool shockPerformed = false;
-
 private slots:
     void placePad();
     void bodyType(int index);
@@ -55,7 +55,6 @@ private slots:
     void drainBattery();
     void placePadIncorrectly();
     void patientContactDuringShockDelivery();
-    void cprPressed();
     void checkForMouthToMouthPress();
     void performMouthtoMouth();
     void shockTimer();

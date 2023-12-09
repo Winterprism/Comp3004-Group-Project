@@ -3,6 +3,7 @@
 HeartRateMonitor::HeartRateMonitor(QSlider *slider, QTextEdit *heartRateDisplay, QObject *parent)
     : QObject(parent), slider(slider), heartRateDisplay(heartRateDisplay), gen(std::random_device{}())
 {
+    heartRateDisplay->setAlignment(Qt::AlignCenter);
     currentAverageRate = this->slider->value();
 
 
@@ -18,7 +19,8 @@ HeartRateMonitor::HeartRateMonitor(QSlider *slider, QTextEdit *heartRateDisplay,
 void HeartRateMonitor::updateHeartRate()
 {
     int heartRate = generateHeartRate();
-    heartRateDisplay->setText(QString::number(heartRate));
+    heartRateDisplay->setHtml("<div style='text-align:center;'>" + QString::number(heartRate) + "</div>");
+
 }
 
 int HeartRateMonitor::generateHeartRate()
@@ -26,10 +28,11 @@ int HeartRateMonitor::generateHeartRate()
     std::uniform_int_distribution<> distrib(currentAverageRate - 5, currentAverageRate + 5);
     return distrib(gen);
 }
-void HeartRateMonitor::stopOrStartMonitoring() {
-    if (timer->isActive()) {
+void HeartRateMonitor::stop() {
         timer->stop();
-    }else{
+        heartRateDisplay->setHtml("<div style='text-align:center;'>--</div>");
+
+}
+void HeartRateMonitor::start() {
             timer->start(1000);
-    }
 }

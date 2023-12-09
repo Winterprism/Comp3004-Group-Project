@@ -14,7 +14,8 @@ class HeartRateMonitor : public QObject
 
 public:
     HeartRateMonitor(QSlider *slider, QTextEdit *heartRateDisplay, QObject *parent = nullptr);
-    void stopOrStartMonitoring();
+    void stop();
+    void start();
 
 private slots:
     void updateHeartRate();
