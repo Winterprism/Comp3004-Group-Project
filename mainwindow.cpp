@@ -261,7 +261,7 @@ void MainWindow::power()
             emit powerOn();
             startUpLights();
             enableAllButtons();
-            drainTimer->start(1000);
+            drainTimer->start(1500);
             ui->CPR->setEnabled(false);
             ui->mouthToMouth->setEnabled(false);
         }
@@ -313,8 +313,7 @@ void MainWindow::shockTimerDelay(){
     }
 }
 
-//for later: a simulation button for someone being in contact with patient when shock is being delivered
-//idea: press shock delivery 3 times - 70/30 chance of survival ?
+
 void MainWindow::shockDelivery()
 {
     ui->GUIConsole->clear();
@@ -473,7 +472,7 @@ void MainWindow::patientHeartStopped()
     ui->call911Indc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
     lightUpDelay(3);
     ui->call911Indc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
-    ui->GUIConsole->append("Patient has passed away...");
+    ui->GUIConsole->append("Patient has passed away...(RIP)");
     lightUpDelay(2);
     exit(0);
 
