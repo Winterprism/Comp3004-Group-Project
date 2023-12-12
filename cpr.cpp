@@ -40,9 +40,12 @@ void CPR::trackPresses(){
         i = 0;
         timer->restart();
 
+    }else if (timer->elapsed() < 3000 && i >= 5) {
+        display->append("Slow down!\n");
     }if(counter == 11){
         emit countReachedTen();
         counter = 0;
+        i=0;
         timer->restart();
         lightTimer->stop();
         led->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");

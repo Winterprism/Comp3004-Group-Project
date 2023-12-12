@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
 //    connect(this, &MainWindow::getIndcColor, cpr, &CPR::getIndcColor);
     connect(cpr, &CPR::countReachedTen, this, &MainWindow::checkForMouthToMouthPress);
     connect(ui->placePadIncorrectly,SIGNAL(released()), this, SLOT(placePadIncorrectly()));
+    connect(ui->PadsLoss,SIGNAL(released()), this, SLOT(padsLossConnection()));
     connect(ui->shockDelivery, SIGNAL(released()), this, SLOT(shockDelivery()));
     connect(ui->contactShockDelivery, SIGNAL(released()), this, SLOT(patientContactDuringShockDelivery()));
     connect(ui->heartIsStopped, SIGNAL(released()), this, SLOT(patientHeartStopped()));
@@ -61,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
                     movie->setSpeed(ui->currHeartRate->toPlainText().toInt()*2);
                     shockAdvised();
                     ui->shockDelivery->setEnabled(true);
+
                 }
             }
         }
@@ -91,9 +93,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->CPR->setEnabled(false); //uncomment when ready to test
     ui->shockDelivery->setEnabled(false);
-    // ui->placePadIncorrectly->setEnabled(false);
-    // ui->contactShockDelivery->setEnabled(false);
-//    ui->mouthToMouth->setEnabled(falsetIntervale);
+
     mouthToMouthReady = false;
 }
 
@@ -131,7 +131,7 @@ void MainWindow::placePad()
     movie->setSpeed(100);
     movie->start();
     heartRateMonitor->start();
-
+    ui->PadsLoss->setEnabled("true");
     lightUpDelay(1);
     ui->padPlacedIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;");
     ui->shockDeliveredIndc->setStyleSheet("color: #333;border: 2px solid #555;border-radius: 20px;border-style: outset;background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,radius: 1.35, stop: 0 #fff, stop: 1 #888);padding: 5px;background-color: rgb(220, 20, 60)");
@@ -190,6 +190,22 @@ void MainWindow::placePadIncorrectly()
     ui->GUIConsole->append(padChoice + " are placed Incorrectly");
     ui->GUIConsole->append("Please place correctly");
 
+}
+
+void MainWindow::padsLossConnection()
+{
+    movie->stop();
+    drainTimer->stop();
+    processLabel->clear();
+    ui->currHeartRate->setText("--");
+
+    ui->shockAdvised->setStyleSheet("font: 20pt;background-color: rgb(255, 255, 255);");
+
+    heartRateMonitor->stop();
+    padChoice = ui->electrodePadOption->currentText();
+    ui->GUIConsole->clear();
+    ui->GUIConsole->append(padChoice + " have loss connection");
+    ui->GUIConsole->append("Please Reconnect Pads");
 }
 
 
@@ -320,7 +336,6 @@ void MainWindow::shockDelivery()
     ui->GUIConsole->append("Shock Delivered\n");
     ui->shockAdvised->setStyleSheet("font: 20pt;color: rgb(192, 191, 188);background-color: rgb(255, 255, 255);");
     shockPerformed = true;
-    ui->contactShockDelivery->setEnabled(true);
 
     QTimer::singleShot(0, this, &MainWindow::shockTimer);
     QTimer::singleShot(1000, this, &MainWindow::shockTimerDelay);
@@ -399,6 +414,7 @@ void MainWindow::disableAllButtons()
     ui->placePadIncorrectly->setDisabled(true);
     ui->contactShockDelivery->setDisabled(true);
     ui->heartIsStopped->setDisabled(true);
+    ui->PadsLoss->setDisabled("true");
 
 }
 
@@ -410,7 +426,6 @@ void MainWindow::enableAllButtons()
     ui->horizontalSlider->setDisabled(false);
     ui->electrodePadOption->setEnabled(true);
     ui->placePadIncorrectly->setDisabled(false);
-    ui->contactShockDelivery->setDisabled(false);
     ui->heartIsStopped->setDisabled(false);
 }
 
@@ -481,6 +496,7 @@ void MainWindow::patientHeartStopped()
 void MainWindow::shockAdvised()
 {
     if(shockPerformed == false){
+        ui->contactShockDelivery->setEnabled(true);
         ui->shockAdvised->setStyleSheet("font: 20pt;color: rgb(0, 0, 0);background-color: rgb(249, 240, 107);");
         lightUpDelay(1);
         ui->shockAdvised->setStyleSheet("font: 20pt;color: rgb(192, 191, 188);background-color: rgb(255, 255, 255);");

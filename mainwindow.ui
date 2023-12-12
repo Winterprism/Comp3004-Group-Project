@@ -182,10 +182,10 @@ border-color: rgb(0, 0, 0);</string>
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>920</x>
+      <x>926</x>
       <y>60</y>
-      <width>90</width>
-      <height>3</height>
+      <width>141</width>
+      <height>2</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -695,6 +695,9 @@ p, li { white-space: pre-wrap; }
     </property>
    </widget>
    <widget class="QPushButton" name="contactShockDelivery">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>170</x>
@@ -1035,6 +1038,22 @@ p, li { white-space: pre-wrap; }
      <string>Patient Heart is Stopped</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="PadsLoss">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>630</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Pads Loss of connection</string>
+    </property>
+   </widget>
    <zorder>AEDDisplay</zorder>
    <zorder>textEdit</zorder>
    <zorder>GUIConsole</zorder>
@@ -1100,6 +1119,7 @@ p, li { white-space: pre-wrap; }
    <zorder>cprMouthIndc_2</zorder>
    <zorder>shockAdvised</zorder>
    <zorder>heartIsStopped</zorder>
+   <zorder>PadsLoss</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

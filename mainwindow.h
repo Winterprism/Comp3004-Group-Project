@@ -67,6 +67,7 @@ private slots:
     void patientHeartStopped();
     void shockAdvised();
     void heartRateChanger();
+    void padsLossConnection();
 
 };
 #endif // MAINWINDOW_H
