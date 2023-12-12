@@ -10,7 +10,6 @@ CONFIG += c++11
 
 SOURCES += \
     HeartRateMonitor.cpp \
-    cad.cpp \
     cpr.cpp \
     display.cpp \
     main.cpp \
@@ -18,7 +17,6 @@ SOURCES += \
 
 HEADERS += \
     HeartRateMonitor.h \
-    cad.h \
     cpr.h \
     display.h \
     mainwindow.h
